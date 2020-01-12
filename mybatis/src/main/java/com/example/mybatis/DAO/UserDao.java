@@ -45,4 +45,6 @@ public interface UserDao {
 
 
     User findUserByNameForXml(@Param("name") String name);
+    
+    User findUserByIdForXml(@Param("id") int id);
 }
