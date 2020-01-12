@@ -6,4 +6,26 @@
     <select id="findUserByNameForXml" parameterType="String" resultType="com.example.mybatis.PO.User">
         SELECT * FROM user WHERE name = #{name}
     </select>
+
+    <select id="findUserByIdForXml" parameterType="int" resultMap="userMap">
+        SELECT u.*
+        ,ud.user_id as ud_user_id
+        ,ud.user_detail as ud_user_detail
+        ,ud.user_detail_id as ud_user_detail_id
+        FROM user as u
+        left join user_detail as ud
+        on u.id = ud.user_id
+        WHERE u.id = #{id}
+    </select>
+    <resultMap id="userMap" type="com.example.mybatis.PO.User" autoMapping="true">
+        <id property="id" column="id"/>
+        <collection property="userDetails" column="user_id"
+                    ofType="com.example.mybatis.PO.UserDetail"
+                    resultMap="userDetailMap"
+                    columnPrefix="ud_"/>
+    </resultMap>
+    <resultMap id="userDetailMap" type="com.example.mybatis.PO.UserDetail" autoMapping="true">
+        <id property="user_id" column="user_id"/>
+    </resultMap>
+
 </mapper>
