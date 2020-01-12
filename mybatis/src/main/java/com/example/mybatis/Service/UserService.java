@@ -24,6 +24,10 @@ public class UserService {
     public User selectUserByNameForXml(String name) {
         return userDao.findUserByNameForXml(name);
     }
+    
+    public User selectUserByIdForXml(int id) {
+        return userDao.findUserByIdForXml(id);
+    }
 
 
     /**
